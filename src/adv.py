@@ -50,41 +50,48 @@ while True:
     direction = input(
         "Press to move 'n', 's', 'e', 'w'. Press to exit 'q': ")
 #
+    movements = ['n', 's', 'e', 'w', 'q']
 # If the user enters a cardinal direction, attempt to move to the room there.
-    if direction == 'n':
-        # room['outside'].n_to = room['foyer']
-        player.current_room = player.current_room.n_to
-
-    elif direction == 's':
-        # room['foyer'].s_to = room['outside']
-        player.current_room = player.current_room.s_to
+    if direction in movements:
         if direction == 'n':
-             # room['foyer'].n_to = room['overlook']
+            # room['outside'].n_to = room['foyer']
             player.current_room = player.current_room.n_to
-            if direction == 's':
-                # room['foyer'].s_to = room['outside']
-                player.current_room = player.current_room.s_to
 
-    elif direction == 'e':
-        # room['foyer'].e_to = room['narrow']
-        player.current_room = player.current_room.e_to
-        if direction == 'n':
-            # room['narrow'].n_to = room['treasure']
-            player.current_room = player.current_room.n_to
-            if direction == 's':
-                #room['treasure'].s_to = room['narrow']
-                player.current_room = player.current_room.s_to
+        elif direction == 's':
+            # room['foyer'].s_to = room['outside']
+            player.current_room = player.current_room.s_to
+            if direction == 'n':
+                # room['foyer'].n_to = room['overlook']
+                player.current_room = player.current_room.n_to
+                if direction == 's':
+                    # room['overlook'].s_to = room['foyer']
+                    player.current_room = player.current_room.s_to
 
-    elif direction == 'w':
-        # room['narrow'].w_to = room['foyer']
-        player.current_room = player.current_room.w_to
+        elif direction == 'e':
+            # room['foyer'].e_to = room['narrow']
+            player.current_room = player.current_room.e_to
+            if direction == 'n':
+                # room['narrow'].n_to = room['treasure']
+                player.current_room = player.current_room.n_to
+                if direction == 's':
+                    #room['treasure'].s_to = room['narrow']
+                    player.current_room = player.current_room.s_to
 
-# Print an error message if the movement isn't allowed.
-    if player.current_room == None:
-        print("You cannot go this way")
-        None = player.current_room
-        direction = input(
-            "Press to move 'n', 's', 'e', 'w'. Press to exit 'q': ")
-# If the user enters "q", quit the game.
+        elif direction == 'w':
+            # room['narrow'].w_to = room['foyer']
+            player.current_room = player.current_room.w_to
 
-print(player)
+    # Print an error message if the movement isn't allowed.
+    else:
+        print('That is not a valid movement.')
+
+    # if player.current_room == None:
+    #     print('This way is blocked! Try another direction.')
+    #     player.current_room
+
+    # If the user enters "q", quit the game
+    if direction == 'q':
+        print("Player has quit the game")
+        break
+
+# print(player)
