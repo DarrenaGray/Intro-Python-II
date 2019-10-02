@@ -1,4 +1,5 @@
 from room import Room
+from player import Player
 
 # Declare all the rooms
 
@@ -38,14 +39,52 @@ room['treasure'].s_to = room['narrow']
 #
 
 # Make a new player object that is currently in the 'outside' room.
+player = Player("Player", room['outside'])
 
 # Write a loop that:
-#
-# * Prints the current room name
+while True:
+    # * Prints the current room name
+    print(player.current_room)
 # * Prints the current description (the textwrap module might be useful here).
 # * Waits for user input and decides what to do.
+    direction = input(
+        "Press to move 'n', 's', 'e', 'w'. Press to exit 'q': ")
 #
 # If the user enters a cardinal direction, attempt to move to the room there.
+    if direction == 'n':
+        # room['outside'].n_to = room['foyer']
+        player.current_room = player.current_room.n_to
+
+    elif direction == 's':
+        # room['foyer'].s_to = room['outside']
+        player.current_room = player.current_room.s_to
+        if direction == 'n':
+             # room['foyer'].n_to = room['overlook']
+            player.current_room = player.current_room.n_to
+            if direction == 's':
+                # room['foyer'].s_to = room['outside']
+                player.current_room = player.current_room.s_to
+
+    elif direction == 'e':
+        # room['foyer'].e_to = room['narrow']
+        player.current_room = player.current_room.e_to
+        if direction == 'n':
+            # room['narrow'].n_to = room['treasure']
+            player.current_room = player.current_room.n_to
+            if direction == 's':
+                #room['treasure'].s_to = room['narrow']
+                player.current_room = player.current_room.s_to
+
+    elif direction == 'w':
+        # room['narrow'].w_to = room['foyer']
+        player.current_room = player.current_room.w_to
+
 # Print an error message if the movement isn't allowed.
-#
+    if player.current_room == None:
+        print("You cannot go this way")
+        None = player.current_room
+        direction = input(
+            "Press to move 'n', 's', 'e', 'w'. Press to exit 'q': ")
 # If the user enters "q", quit the game.
+
+print(player)
