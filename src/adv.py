@@ -55,36 +55,50 @@ room['treasure'].s_to = room['narrow']
 player = Player('Player', room['outside'])
 print(player)
 
-
+# Will try to refactor later to make it DRY
 while True:
     # print(player.current_room)
 
-    user = input('Press [n], [s], [e], [w] to move. Press [q] to quit: ')
+    command = input('Press [n], [s], [e], [w] to move. Press [q] to quit: ')
 
     moves = ['n', 's', 'e', 'w']
 
-    if user == 'q':
+    if command == 'q':
+        print("Player has exited the game.")
         break
 
-    if user in moves:
+    if command in moves:
 
-        if user == 'n':
-            player.current_room = player.current_room.n_to
+        if command == 'n':
+            if player.current_room.n_to != None:
+                player.current_room = player.current_room.n_to
 
-        elif user == 's':
-            player.current_room = player.current_room.s_to
+            else:
+                print("There is no room here!")
 
-        elif user == 'e':
-            player.current_room = player.current_room.e_to
+        elif command == 's':
+            if player.current_room.s_to != None:
+                player.current_room = player.current_room.s_to
 
-        elif user == 'w':
-            player.current_room = player.current_room.w_to
+            else:
+                print("There is no room here!")
 
-        if player.current_room is None:
-            print('You cannot go this way!')
+        elif command == 'e':
+            if player.current_room.e_to != None:
+                player.current_room = player.current_room.e_to
+
+            else:
+                print("There is no room here!")
+        elif command == 'w':
+            if player.current_room.w_to != None:
+                player.current_room = player.current_room.w_to
+
+            else:
+                print("There is no room here!")
 
         print(player)
 
+# Old Code
 
 # #
 # # Main
